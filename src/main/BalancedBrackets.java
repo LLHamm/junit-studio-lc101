@@ -22,10 +22,22 @@ public class BalancedBrackets {
      * @return true if balanced, false otherwise
      */
     public static boolean hasBalancedBrackets(String str) {
+        boolean isFirstBracket = false;
+        if (str.trim().length()==0) {
+            return false;
+        }
+        if (str.indexOf("]") < str.indexOf("[")) {
+            return false;
+        }
         int brackets = 0;
+        boolean foundOpen = false;
         for (char ch : str.toCharArray()) {
             if (ch == '[') {
+                if (foundOpen) {
+                    return false;
+                }
                 brackets++;
+                foundOpen = true;
             } else if (ch == ']') {
                 brackets--;
             }
